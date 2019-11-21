@@ -3,6 +3,10 @@
   background-color: var(--color-neutral-1);
   cursor: pointer;
   display: flex;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 10;
 
   .content {
     height: 100%;

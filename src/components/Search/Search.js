@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { navigate } from "@reach/router";
 import axios from "axios";
 
 import ResultsContext from "components/Context/ResultsContext";
@@ -21,6 +22,7 @@ const Search = () => {
       .then(response => {
         setLoading(false);
         setResults(response.data);
+        navigate("/");
       });
   };
   return (
