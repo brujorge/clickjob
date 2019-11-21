@@ -1,0 +1,29 @@
+:root {
+  --font-avenir-next-regular: "Avenir-Next-Regular", Tahoma, sans-serif;
+  --font-avenir-next-medium: "Avenir-Next-Medium", Tahoma, sans-serif;
+  --font-avenir-next-demi: "Avenir-Next-Demi", Tahoma, sans-serif;
+}
+
+@font-face {
+  font-family: "Avenir-Next-Regular";
+  font-style: normal;
+  font-weight: normal;
+  font-display: swap;
+  src: url("~assets/fonts/Avenir-Next-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Avenir-Next-Medium";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("~assets/fonts/Avenir-Next-Medium.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Avenir-Next-Demi";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("~assets/fonts/Avenir-Next-Demi.woff2") format("woff2");
+}

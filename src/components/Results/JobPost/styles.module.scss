@@ -1,0 +1,79 @@
+.jobPost {
+  margin-top: 16px;
+  position: relative;
+
+  .bookmark {
+    position: absolute;
+    top: -1px;
+    right: 32px;
+    cursor: pointer;
+  }
+
+  .jobPreview {
+    height: 90px;
+    background-color: var(--color-white);
+    display: flex;
+    padding-left: 20px;
+    cursor: pointer;
+
+    img {
+      width: 60px;
+      height: 60px;
+      align-self: center;
+    }
+
+    .jobDetails {
+      margin: 16px;
+      flex-direction: column;
+      display: flex;
+
+      .jobHeading {
+        display: flex;
+
+        h6 {
+          margin: 0;
+          font-size: 18px;
+          font-family: var(--font-avenir-next-demi);
+        }
+      }
+
+      .jobSubheading {
+        display: flex;
+        margin-top: 4px;
+        p {
+          margin: 0;
+          font-size: 12px;
+          font-family: var(--font-avenir-next-regular);
+        }
+
+        span {
+          margin-left: 6px;
+          font-size: 12px;
+          font-family: var(--font-avenir-next-regular);
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  .jobSalary {
+    display: flex;
+    align-items: center;
+    margin: 0 0 0 8px;
+    font-family: var(--font-avenir-next-demi);
+    font-size: 8px;
+
+    svg {
+      margin-right: 4px;
+    }
+  }
+}
+
+.jobDescription {
+  background-color: var(--color-white);
+}

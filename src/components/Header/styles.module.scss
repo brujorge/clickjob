@@ -1,0 +1,31 @@
+.header {
+  height: 70px;
+  background-color: var(--color-neutral-1);
+  cursor: pointer;
+  display: flex;
+
+  .content {
+    height: 100%;
+    max-width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+  }
+
+  img {
+    height: 60px;
+    width: auto;
+  }
+
+  .logout {
+    height: 100%;
+    margin: 0 30px 0 auto;
+    cursor: pointer;
+    font-family: var(--font-avenir-next-demi);
+    font-size: 18px;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+}

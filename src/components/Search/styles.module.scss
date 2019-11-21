@@ -1,0 +1,38 @@
+.search {
+  display: flex;
+  position: relative;
+  margin-left: 24px;
+
+  svg {
+    position: absolute;
+    top: 12px;
+    left: 10px;
+  }
+
+  input {
+    border: none;
+    height: 40px;
+    background-color: var(--color-white);
+    padding: 7px 34px 7px;
+    width: 477px;
+    font-size: 18px;
+    font-family: var(--font-avenir-next-regular);
+    outline: none;
+
+    &::placeholder {
+      color: var(--color-neutral-2);
+    }
+  }
+
+  button {
+    background-color: var(--color-blue-1);
+    color: 18px;
+    color: var(--color-white);
+    padding: 7px 16px;
+    font-family: var(--font-avenir-next-demi);
+    border: none;
+    border-radius: 0 4px 4px 0;
+    outline: none;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,87 @@
+.login {
+  height: 100vh;
+  background-color: var(--color-neutral-1);
+  padding-top: 84px;
+}
+
+.loginForm {
+  margin: 0 auto 0;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+
+  .logo {
+    width: 200px;
+    height: auto;
+    align-self: center;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-family: var(--font-avenir-next-demi);
+    margin: 35px 0 0;
+    text-align: center;
+  }
+
+  .field {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+
+    &:first-of-type {
+      margin-top: 32px;
+    }
+
+    label {
+      font-size: 18px;
+      font-family: var(--font-avenir-next-demi);
+    }
+
+    input {
+      padding: 12px 16px;
+      font-size: 18px;
+      font-family: var(--font-avenir-next-medium);
+      margin-top: 2px;
+      background-color: var(--color-white);
+      border: none;
+      border: 1px solid var(--color-neutral-6);
+      outline: none;
+      height: 50px;
+
+      &::placeholder {
+        color: var(--color-neutral-5);
+      }
+
+      &:active,
+      &:focus {
+        padding-left: 14px;
+        border: 2px solid var(--color-black);
+      }
+    }
+  }
+
+  button {
+    margin: 48px auto 0;
+    background-color: var(--color-ink-1);
+    border-radius: 0 27px 27px 0;
+    color: var(--color-white);
+    font-size: 24px;
+    font-family: var(--font-avenir-next-demi);
+    text-align: center;
+    width: 100%;
+    padding: 11px;
+    cursor: pointer;
+  }
+
+  .note {
+    font-size: 18px;
+    font-family: var(--font-avenir-next-demi);
+    margin: 20px 0 0;
+    text-align: center;
+
+    a {
+      color: var(--color-blue-1);
+      text-decoration: none;
+    }
+  }
+}
