@@ -1,24 +1,30 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
 
-import DataContext from "components/Context/DataContext";
+import ResultsContext from "components/Context/ResultsContext";
 
 import styles from "./styles.module.scss";
 
 import { ReactComponent as SearchIcon } from "assets/icons/search.svg";
 
 const Search = () => {
+  const { setResults } = useContext(ResultsContext);
+  const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState("");
-  const { setData } = useContext(DataContext);
 
-  const handleSearch = async () => {
+  const handleSearch = async e => {
+    setLoading(true);
+    e.preventDefault();
     const queryString = query.split(" ").join("+");
     axios
       .get(`https://www.getonbrd.com/search/jobs?q=${queryString}`)
-      .then(response => setData(response.data));
+      .then(response => {
+        setLoading(false);
+        setResults(response.data);
+      });
   };
   return (
-    <div className={styles.search}>
+    <form className={styles.search} onSubmit={handleSearch}>
       <SearchIcon />
       <input
         type="text"
@@ -26,10 +32,10 @@ const Search = () => {
         placeholder="React, Node.js, Ruby on Rails remote"
         onChange={e => setQuery(e.target.value)}
       />
-      <button className={styles.button} onClick={handleSearch}>
+      <button disabled={loading} type="submit" className={styles.button}>
         Search
       </button>
-    </div>
+    </form>
   );
 };
 

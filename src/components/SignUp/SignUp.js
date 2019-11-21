@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Formik, Field, Form } from "formik";
 import { Redirect, Link } from "@reach/router";
 import axios from "axios";
@@ -12,13 +12,14 @@ import styles from "./styles.module.scss";
 
 const SignUp = ({ handleSuccessfulAuth }) => {
   const user = useContext(UserContext);
+  const [error, setError] = useState(null);
   if (user) {
     return <Redirect to="/" noThrow />;
   }
   const handleSubmit = ({ email, password, passwordConfirmation }) => {
     axios
       .post(
-        "http://localhost:3001/registrations",
+        "https://clickjob-api.herokuapp.com/registrations",
         {
           user: {
             email: email,
@@ -29,6 +30,9 @@ const SignUp = ({ handleSuccessfulAuth }) => {
         { withCredentials: true }
       )
       .then(response => {
+        if (response.data.status === 500) {
+          setError("Email already exists.");
+        }
         if (response.data.status === "created") {
           handleSuccessfulAuth(response.data.user);
         }
@@ -41,7 +45,8 @@ const SignUp = ({ handleSuccessfulAuth }) => {
     <div className={styles.signUp}>
       <div className={styles.signUpForm}>
         <img className={styles.logo} src={Logo} alt="clickjob logo" />
-        <h2>Sign Up</h2>
+        <h2>Sign up</h2>
+        {error && <p className={styles.error}>{error}</p>}
         <Formik
           initialValues={{
             email: "",

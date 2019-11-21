@@ -1,0 +1,19 @@
+.favouriteJobs {
+  background-color: var(--color-neutral-1);
+  padding-top: 20px;
+  min-height: 90vh;
+
+  .title {
+    font-family: var(--font-avenir-next-demi);
+    font-size: 24px;
+    margin: 0 auto;
+    max-width: 970px;
+  }
+
+  .favouriteJobsList {
+    padding: 0;
+    margin: 12px auto 0;
+    max-width: 970px;
+    list-style: none;
+  }
+}

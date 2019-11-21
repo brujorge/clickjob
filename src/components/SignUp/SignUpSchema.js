@@ -5,7 +5,9 @@ const SignUpSchema = Yup.object().shape({
     .email()
     .required(),
   password: Yup.string().required(),
-  passwordConfirmation: Yup.string().required()
+  passwordConfirmation: Yup.string()
+    .required()
+    .oneOf([Yup.ref("password"), null])
 });
 
 export default SignUpSchema;

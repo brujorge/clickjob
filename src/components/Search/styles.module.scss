@@ -34,5 +34,9 @@
     border-radius: 0 4px 4px 0;
     outline: none;
     cursor: pointer;
+
+    &:disabled {
+      background-color: var(--color-neutral-5);
+    }
   }
 }

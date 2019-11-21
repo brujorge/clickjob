@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { Formik, Field, Form } from "formik";
 import { Redirect, Link } from "@reach/router";
 import axios from "axios";
@@ -12,13 +12,15 @@ import styles from "./styles.module.scss";
 
 const Login = ({ handleSuccessfulAuth }) => {
   const user = useContext(UserContext);
+  const [error, setError] = useState(null);
   if (user) {
     return <Redirect to="/" noThrow />;
   }
   const handleSubmit = ({ email, password }) => {
+    setError("");
     axios
       .post(
-        "http://localhost:3001/sessions",
+        "https://clickjob-api.herokuapp.com/sessions",
         {
           user: {
             email: email,
@@ -28,13 +30,14 @@ const Login = ({ handleSuccessfulAuth }) => {
         { withCredentials: true }
       )
       .then(response => {
-        console.log(response);
-        if (response.data.status === "created") {
+        if (response.data.status === 401) {
+          setError("Wrong username or password.");
+        } else if (response.data.status === "created") {
           handleSuccessfulAuth(response.data.user);
         }
       })
       .catch(error => {
-        console.log("Login failed", error);
+        console.log("Authentication failed", error);
       });
   };
   return (
@@ -42,6 +45,7 @@ const Login = ({ handleSuccessfulAuth }) => {
       <div className={styles.loginForm}>
         <img className={styles.logo} src={Logo} alt="clickjob logo" />
         <h2>Log in</h2>
+        {error && <p className={styles.error}>{error}</p>}
         <Formik
           initialValues={{
             email: "",

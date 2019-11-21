@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import classNames from "classnames";
 
 import { ReactComponent as CashIcon } from "assets/icons/cash.svg";
 import { ReactComponent as RemoteIcon } from "assets/icons/remote.svg";
@@ -36,18 +37,25 @@ const JobSalary = ({ salary }) => {
   );
 };
 
-const JobPost = ({ job }) => {
+const JobPost = ({ job, isFavourite = false, saveToFavourites }) => {
   const [jobIsOpen, setJobIsOpen] = useState(false);
-  const saveJobPost = job => {
-    console.log(job);
+  const jobPostClassNames = classNames({
+    [styles.jobPost]: true,
+    [styles.isFavourite]: isFavourite
+  });
+  const handleJobIsOpen = e => {
+    e.stopPropagation();
+    setJobIsOpen(!jobIsOpen);
   };
   return (
-    <li onClick={() => setJobIsOpen(!jobIsOpen)} className={styles.jobPost}>
-      <BookmarkIcon
+    <li className={jobPostClassNames}>
+      <button
         className={styles.bookmark}
-        onClick={() => saveJobPost(job)}
-      />
-      <div className={styles.jobPreview}>
+        onClick={() => saveToFavourites(job, isFavourite)}
+      >
+        <BookmarkIcon />
+      </button>
+      <div onClick={handleJobIsOpen} className={styles.jobPreview}>
         <img src={job.logo_url} alt={`${job.company.name} logo`} />
         <div className={styles.jobDetails}>
           <div className={styles.jobHeading}>
@@ -65,10 +73,25 @@ const JobPost = ({ job }) => {
         </div>
       </div>
       {jobIsOpen && (
-        <div
-          className={styles.jobDescription}
-          dangerouslySetInnerHTML={{ __html: job.description }}
-        ></div>
+        <div className={styles.jobDescription}>
+          <section
+            dangerouslySetInnerHTML={{ __html: job.description }}
+          ></section>
+          <h2>Functions</h2>
+          <section
+            className={styles.functions}
+            dangerouslySetInnerHTML={{ __html: job.functions }}
+          ></section>
+          {job.benefits && (
+            <>
+              <h2>Benefits</h2>
+              <section
+                className={styles.benefits}
+                dangerouslySetInnerHTML={{ __html: job.benefits }}
+              ></section>
+            </>
+          )}
+        </div>
       )}
     </li>
   );

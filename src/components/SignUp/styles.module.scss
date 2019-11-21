@@ -70,6 +70,10 @@
     width: 100%;
     padding: 11px;
     cursor: pointer;
+
+    &:disabled {
+      background-color: var(--color-neutral-5);
+    }
   }
 
   .note {
@@ -82,5 +86,12 @@
       color: var(--color-blue-1);
       text-decoration: none;
     }
+  }
+
+  .error {
+    color: var(--color-red-1);
+    font-family: var(--font-avenir-next-regular);
+    text-align: center;
+    font-size: 16px;
   }
 }

@@ -1,42 +1,24 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useContext } from "react";
 import { Redirect } from "@reach/router";
 
-import Header from "components/Header";
+import ResultsContext from "components/Context/ResultsContext";
 import Results from "components/Results";
+import Loading from "components/Loading";
 
-import DataContext from "components/Context/DataContext";
-
-const DEFAULT_QUERY = "React+Rails";
-
-const getData = async setData => {
-  await axios
-    .get(`https://www.getonbrd.com/search/jobs?q=${DEFAULT_QUERY}`)
-    .then(response => {
-      setData(response.data);
-    });
-};
-
-const Dashboard = ({ handleLogout, user }) => {
-  const [data, setData] = useState(null);
-  useEffect(() => {
-    getData(setData);
-  }, []);
-
+const Dashboard = ({ user }) => {
+  const { results, setResults } = useContext(ResultsContext);
   if (!user) {
     return <Redirect to="/login" noThrow />;
   }
-
-  if (!data) {
-    return <h1>Loading...</h1>;
+  if (!results) {
+    return <Loading />;
   }
 
   return (
     <main>
-      <DataContext.Provider value={{ setData: setData }}>
-        <Header handleLogout={handleLogout} />
-        <Results data={data} />
-      </DataContext.Provider>
+      <ResultsContext.Provider value={{ setResults: setResults }}>
+        <Results results={results} user={user} />
+      </ResultsContext.Provider>
     </main>
   );
 };
