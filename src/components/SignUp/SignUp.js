@@ -13,10 +13,12 @@ import styles from "./styles.module.scss";
 const SignUp = ({ handleSuccessfulAuth }) => {
   const user = useContext(UserContext);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   if (user) {
     return <Redirect to="/" noThrow />;
   }
   const handleSubmit = ({ email, password, passwordConfirmation }) => {
+    setLoading(true);
     axios
       .post(
         "https://clickjob-api.herokuapp.com/registrations",
@@ -31,13 +33,16 @@ const SignUp = ({ handleSuccessfulAuth }) => {
       )
       .then(response => {
         if (response.data.status === 500) {
+          setLoading(false);
           setError("Email already exists.");
         }
         if (response.data.status === "created") {
+          setLoading(false);
           handleSuccessfulAuth(response.data.user);
         }
       })
       .catch(error => {
+        setLoading(false);
         console.log("Registration failed", error);
       });
   };
@@ -83,7 +88,7 @@ const SignUp = ({ handleSuccessfulAuth }) => {
                   placeholder="Confirm your password"
                 />
               </div>
-              <button disabled={!isValid} type="submit">
+              <button disabled={!isValid || loading} type="submit">
                 SIGN UP
               </button>
             </Form>

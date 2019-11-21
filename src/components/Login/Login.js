@@ -13,10 +13,12 @@ import styles from "./styles.module.scss";
 const Login = ({ handleSuccessfulAuth }) => {
   const user = useContext(UserContext);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
   if (user) {
     return <Redirect to="/" noThrow />;
   }
   const handleSubmit = ({ email, password }) => {
+    setLoading(true);
     setError("");
     axios
       .post(
@@ -31,8 +33,10 @@ const Login = ({ handleSuccessfulAuth }) => {
       )
       .then(response => {
         if (response.data.status === 401) {
+          setLoading(false);
           setError("Wrong username or password.");
         } else if (response.data.status === "created") {
+          setLoading(false);
           handleSuccessfulAuth(response.data.user);
         }
       })
@@ -70,7 +74,7 @@ const Login = ({ handleSuccessfulAuth }) => {
                   placeholder="******"
                 />
               </div>
-              <button disabled={!isValid} type="submit">
+              <button disabled={!isValid || loading} type="submit">
                 LOGIN
               </button>
             </Form>
